@@ -32,7 +32,7 @@ FROM
         ON ca.AddressID = a.AddressID;
 
 -- Task2.1
-
+USE AdventureWorksLT2019
 SELECT
     c.CompanyName,
     c.FirstName,
@@ -44,12 +44,8 @@ FROM
     LEFT JOIN SalesLT.SalesOrderHeader AS soh
         ON c.CustomerID = soh.CustomerID
 ORDER BY
-    CASE
-        WHEN soh.SalesOrderID IS NULL THEN 1
-        ELSE 0
-    END,
-    c.CompanyName,
-    soh.SalesOrderID;
+    soh.SalesOrderID DESC;
+    --c.CompanyName;
 
 -- Task2.2
 
