@@ -1,4 +1,5 @@
 SET LANGUAGE us_english;
+USE AdventureWorksLT2019;
 
 -- Task1.1
 
@@ -109,3 +110,22 @@ HAVING
     SUM(sod.LineTotal) > 20000
 ORDER BY
     TotalRevenue DESC;
+
+SELECT
+    c.CustomerID
+FROM
+    SalesLT.Customer as c
+WHERE
+    LEN(c.LastName) > 12
+
+
+SELECT
+    FirstName, h.TotalDue
+FROM
+    SalesLT.Customer as c 
+    INNER JOIN SalesLT.SalesOrderHeader as h
+        ON c.CustomerID = h.CustomerID
+ORDER BY
+    h.TotalDue DESC
+
+select datediff(day, '2026-10-16','2027-01-01')
