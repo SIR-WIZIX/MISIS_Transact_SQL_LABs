@@ -1,3 +1,4 @@
+use AdventureWorksLT2019;
 -- Task1.1
 
 SELECT
@@ -18,6 +19,26 @@ ORDER BY
     a.CountryRegion,
     a.StateProvince;
 GO
+
+SELECT
+    a.CountryRegion,
+    a.StateProvince,
+    SUM(soh.TotalDue) AS Revenue
+FROM
+    SalesLT.Address AS a
+    INNER JOIN SalesLT.CustomerAddress AS ca
+        ON a.AddressID = ca.AddressID
+    INNER JOIN SalesLT.Customer AS c
+        ON ca.CustomerID = c.CustomerID
+    INNER JOIN SalesLT.SalesOrderHeader AS soh
+        ON c.CustomerID = soh.CustomerID
+GROUP BY
+    GROUPING SETS((a.CountryRegion, a.StateProvince),(a.StateProvince))
+ORDER BY
+    a.CountryRegion,
+    a.StateProvince;
+GO
+
 
 -- Task1.2
 
