@@ -14,6 +14,8 @@ BEGIN
     EXEC sys.sp_executesql @SequenceSQL;
 END;
 GO
+-- for creating sequence from the task
+
 
 DECLARE @OrderDate date = CAST(GETDATE() AS date);
 DECLARE @DueDate date = DATEADD(DAY, 7, @OrderDate);
@@ -22,6 +24,8 @@ DECLARE @SalesOrderID int = NEXT VALUE FOR SalesLT.SalesOrderNumber;
 
 IF COLUMNPROPERTY(OBJECT_ID(N'SalesLT.SalesOrderHeader'), N'SalesOrderID', 'IsIdentity') = 1
     SET IDENTITY_INSERT SalesLT.SalesOrderHeader ON;
+
+-- for insertion with SalesOrderID precalculated
 
 INSERT INTO SalesLT.SalesOrderHeader (
     SalesOrderID,
